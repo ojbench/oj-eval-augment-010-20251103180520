@@ -79,6 +79,9 @@ public:
          * iter++
          */
         iterator operator++(int) {
+            if (ptr == nullptr || ptr->next == nullptr) {
+                throw invalid_iterator();
+            }
             iterator tmp = *this;
             ptr = ptr->next;
             return tmp;
@@ -87,6 +90,9 @@ public:
          * ++iter
          */
         iterator & operator++() {
+            if (ptr == nullptr || ptr->next == nullptr) {
+                throw invalid_iterator();
+            }
             ptr = ptr->next;
             return *this;
         }
@@ -94,6 +100,9 @@ public:
          * iter--
          */
         iterator operator--(int) {
+            if (ptr == nullptr || ptr->prev == nullptr || ptr->prev->data == nullptr) {
+                throw invalid_iterator();
+            }
             iterator tmp = *this;
             ptr = ptr->prev;
             return tmp;
@@ -102,6 +111,9 @@ public:
          * --iter
          */
         iterator & operator--() {
+            if (ptr == nullptr || ptr->prev == nullptr || ptr->prev->data == nullptr) {
+                throw invalid_iterator();
+            }
             ptr = ptr->prev;
             return *this;
         }
